@@ -1,14 +1,16 @@
-from flask import Flask, request, jsonify
-import logging
+import os
 
-# Flaskアプリの作成
+from flask import (Flask, redirect, render_template, request,
+                   send_from_directory, url_for)
+
 app = Flask(__name__)
 
 # ログ設定
 logging.basicConfig(filename='alert_logs.log', level=logging.INFO)
 
+
 # Webhookエンドポイントの作成
-@app.route('/webhook', methods=['POST'])
+@app.route('/')
 def webhook():
     if request.method == 'POST':
         try:
@@ -24,4 +26,5 @@ def webhook():
 
 # アプリの実行
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+   app.run()
+
